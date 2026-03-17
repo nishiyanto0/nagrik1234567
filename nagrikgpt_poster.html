@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NagrikGPT Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #FFEDD5;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .poster {
+    background: #FFF7ED;
+    border-radius: 28px;
+    max-width: 860px;
+    width: 100%;
+    padding: 44px 44px 36px;
+    box-shadow: 0 12px 48px rgba(234,88,12,0.10);
+    border: 1px solid rgba(249,115,22,0.15);
+  }
+
+  /* HEADER */
+  .header { text-align: center; margin-bottom: 28px; }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.4rem; font-weight: 700;
+    color: #1C3A5E; letter-spacing: -1px;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .tagline-sub { font-size: 1rem; color: #78716C; font-weight: 400; letter-spacing: 0.01em; margin-bottom: 10px; }
+  .divider { width: 56px; height: 3px; background: #F97316; border-radius: 2px; margin: 10px auto 14px; }
+  .bridge-text { font-size: 0.9rem; font-weight: 700; color: #EA580C; margin-bottom: 12px; }
+
+  .objectives { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .obj-pill {
+    background: rgba(249,115,22,0.08);
+    border: 1px solid rgba(249,115,22,0.22);
+    border-radius: 20px; padding: 5px 14px;
+    font-size: 0.75rem; font-weight: 600; color: #C2410C;
+  }
+
+  /* SECTION TITLE */
+  .section-title { text-align: center; font-size: 1.05rem; font-weight: 700; color: #1C1917; margin-bottom: 4px; letter-spacing: -0.2px; }
+  .section-sub { text-align: center; font-size: 0.72rem; color: #78716C; margin-bottom: 16px; }
+
+  /* WORKFLOW CARD */
+  .workflow-card {
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(249,115,22,0.18);
+    border-radius: 18px; padding: 22px 20px 18px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(249,115,22,0.06);
+  }
+
+  .lane-label {
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    margin-bottom: 8px; padding-left: 2px;
+  }
+  .lane-label.orange { color: #EA580C; }
+  .lane-label.blue   { color: #1D4ED8; }
+
+  .row { display: flex; align-items: center; gap: 0; }
+
+  .box { flex: 1; border-radius: 10px; padding: 11px 10px; text-align: center; position: relative; }
+  .box h4 { font-size: 0.74rem; font-weight: 700; margin-bottom: 3px; line-height: 1.2; }
+  .box p { font-size: 0.61rem; line-height: 1.3; }
+  
+  .box.orange { background: #FFF7ED; border: 1.5px solid #F97316; }
+  .box.orange h4 { color: #C2410C; }
+  .box.orange p  { color: #9A3412; }
+  
+  .box.blue   { background: #EFF6FF; border: 1.5px solid #3B82F6; }
+  .box.blue h4   { color: #1D4ED8; }
+  .box.blue p    { color: #1E40AF; }
+  
+  .box.green  { background: #F0FDF4; border: 2px solid #22C55E; }
+  .box.green h4  { color: #15803D; }
+  .box.green p   { color: #166534; }
+  
+  .box.gray { background: #F9FAFB; border: 1.5px dashed #9CA3AF; }
+  .box.gray h4 { color: #6B7280; }
+  .box.gray p  { color: #6B7280; }
+
+  .tag {
+    display: inline-block; margin-top: 5px;
+    border-radius: 20px; padding: 2px 8px;
+    font-size: 0.56rem; font-weight: 600;
+  }
+  .tag.karma   { background: #FEF3C7; border: 1px solid #F59E0B; color: #92400E; }
+  .tag.voice   { background: #EDE9FE; border: 1px solid #A855F7; color: #6D28D9; }
+  .tag.blocked { background: #FEF2F2; border: 1px solid #DC2626; color: #991B1B; }
+
+  .arrow { flex: 0 0 22px; text-align: center; font-size: 0.9rem; font-weight: 700; padding-bottom: 12px; color: #F97316; }
+  .arrow.blue { color: #3B82F6; }
+
+  /* Snake connector */
+  .snake { position: relative; height: 52px; }
+  .snake svg { position: absolute; top:0; left:0; width:100%; height:100%; overflow:visible; }
+
+  /* Fake flow indicator */
+  .fake-flow {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    margin-top: 8px; padding: 6px 12px;
+    background: #FEF2F2; border-radius: 8px; border: 1px dashed #DC2626;
+  }
+  .fake-flow span { font-size: 0.58rem; color: #991B1B; font-weight: 600; }
+
+  /* NSS SECTION */
+  .nss-section {
+    background: linear-gradient(135deg, #FAF5FF 0%, #F0FDF4 100%);
+    border: 1.5px solid #A855F7;
+    border-radius: 14px; padding: 16px 20px;
+    margin-top: 16px;
+  }
+  .nss-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .nss-header h4 { font-size: 0.78rem; font-weight: 700; color: #7C3AED; }
+  .nss-header span {
+    font-size: 0.6rem; background: #EDE9FE;
+    border: 1px solid #A855F7; border-radius: 12px;
+    padding: 2px 8px; color: #6D28D9; font-weight: 600;
+  }
+  .nss-flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .nss-item {
+    font-size: 0.65rem; background: white;
+    border: 1px solid #D1D5DB; border-radius: 6px;
+    padding: 4px 10px; color: #374151;
+  }
+  .nss-item.purple { border-color: #A855F7; background: #FAF5FF; color: #7C3AED; }
+  .nss-item.green { border-color: #10B981; background: #ECFDF5; color: #047857; }
+  .nss-arrow { font-size: 0.7rem; color: #A855F7; font-weight: 700; }
+
+  /* Karma engine */
+  .karma-engine {
+    background: #FFFBEB; border: 1.5px solid #F59E0B;
+    border-radius: 10px; padding: 10px 16px;
+    text-align: center; margin-top: 6px;
+  }
+  .karma-engine h4 { font-size: 0.74rem; font-weight: 700; color: #92400E; margin-bottom: 2px; }
+  .karma-engine p  { font-size: 0.61rem; color: #B45309; }
+
+  .ke-divider { display: flex; align-items: center; gap: 0; margin: 8px 0 6px; }
+  .ke-divider div { flex:1; border-top: 1.5px dashed #F59E0B; }
+  .ke-divider span { font-size: 0.58rem; color: #B45309; font-weight: 600; white-space: nowrap; margin: 0 8px; }
+
+  /* BOTTOM ROW */
+  .bottom { display: flex; align-items: center; gap: 28px; margin-top: 4px; }
+  .qr-card {
+    background: white; border-radius: 16px;
+    padding: 18px 20px; text-align: center;
+    border: 1px solid rgba(249,115,22,0.18);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    flex: 0 0 auto;
+  }
+  .qr-card h3 { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: #1C1917; margin-bottom: 10px; }
+  .qr-img {
+    width: 130px; height: 130px;
+    border: 2px dashed #F97316; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; margin: 0 auto 8px;
+  }
+  .qr-img img { width: 100%; height: 100%; object-fit: cover; }
+  .qr-card p { font-size: 0.68rem; color: #78716C; }
+
+  .right-col { flex: 1; }
+  .legend { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: #44403C; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  .team { border-top: 1px solid rgba(249,115,22,0.15); padding-top: 12px; }
+  .team p { font-size: 0.65rem; color: #78716C; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .team-names { display: flex; gap: 10px; flex-wrap: wrap; }
+  .team-name { font-size: 0.72rem; font-weight: 600; color: #C2410C; background: rgba(249,115,22,0.08); border-radius: 8px; padding: 3px 10px; }
+
+  .footer { text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(249,115,22,0.12); }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #F97316; margin-bottom: 2px; }
+  .footer-text { font-size: 0.68rem; color: #A8A29E; }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">NagrikGPT</div>
+    <div class="tagline-sub">AI-Powered Civic Issue Reporting</div>
+    <div class="divider"></div>
+    <div class="bridge-text">Bridging the Gap Between Citizens and Government.</div>
+    <div class="objectives">
+      <span class="obj-pill">Easy Reporting</span>
+      <span class="obj-pill">Voice-to-Text</span>
+      <span class="obj-pill">Real-time Tracking</span>
+      <span class="obj-pill">NSS Volunteering</span>
+      <span class="obj-pill">Transparent Communication</span>
+    </div>
+  </div>
+
+  <!-- WORKFLOW -->
+  <div class="section-title">How It Works</div>
+  <div class="section-sub">From citizen report to resolution — end to end</div>
+
+  <div class="workflow-card">
+
+    <div class="lane-label orange">Citizen side</div>
+    <div class="row">
+      <div class="box orange">
+        <h4>Submit report</h4>
+        <p>Category · photo<br>location · voice input</p>
+        <span class="tag voice">Voice-to-text</span>
+      </div>
+      <div class="arrow">→</div>
+      <div class="box orange">
+        <h4>AI filter + route</h4>
+        <p>Profanity · EN/HI/MR<br>duplicate · dept assign</p>
+        <span class="tag blocked">blocked if flagged</span>
+      </div>
+      <div class="arrow">→</div>
+      <div class="box orange">
+        <h4>Community feed</h4>
+        <p>Visible to all citizens<br>upvotes · comments</p>
+        <span class="tag karma">+10 karma at 5 upvotes</span>
+      </div>
+      <div class="arrow">→</div>
+      <div class="box gray">
+        <h4>Fake report flag</h4>
+        <p>Community votes<br>to flag invalid</p>
+      </div>
+    </div>
+
+    <!-- Fake flow indicator -->
+    <div class="fake-flow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="15" y1="9" x2="9" y2="15"/>
+        <line x1="9" y1="9" x2="15" y2="15"/>
+      </svg>
+      <span>Flagged reports removed — does not proceed to admin</span>
+    </div>
+
+    <!-- SNAKE: Connects Community Feed to Admin Review -->
+    <div class="snake">
+      <svg viewBox="0 0 820 52" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible;">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#F97316"
+              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <path d="M 554 0 L 554 26 L 38 26 L 38 52"
+          fill="none" stroke="#F97316" stroke-width="2"
+          stroke-dasharray="6 4" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+
+    <div class="lane-label blue" style="margin-left:34px;">Official side</div>
+    <div class="row">
+      <div class="box blue">
+        <h4>Admin reviews</h4>
+        <p>Sets priority<br>assigns to officer</p>
+      </div>
+      <div class="arrow blue">→</div>
+      <div class="box blue">
+        <h4>Officer acts</h4>
+        <p>Field visit<br>issue addressed</p>
+        <span class="tag karma">+15 karma → reporter</span>
+      </div>
+      <div class="arrow blue">→</div>
+      <div class="box blue">
+        <h4>Upload proof</h4>
+        <p>Photo verification<br>linked to report</p>
+      </div>
+      <div class="arrow blue">→</div>
+      <div class="box green">
+        <h4>Resolved</h4>
+        <p>Feed updated<br>citizen notified</p>
+        <span class="tag karma">+30 karma · 48hr check</span>
+      </div>
+    </div>
+
+    <!-- NSS Volunteering Section -->
+    <div class="nss-section">
+      <div class="nss-header">
+        <h4>NSS Volunteer Integration</h4>
+        <span>Alternate Task Assignment</span>
+      </div>
+      <div class="nss-flow">
+        <div class="nss-item purple">NSS Group Registers</div>
+        <span class="nss-arrow">→</span>
+        <div class="nss-item">Appears in Officer Dashboard</div>
+        <span class="nss-arrow">→</span>
+        <div class="nss-item">Officer Assigns Task</div>
+        <span class="nss-arrow">→</span>
+        <div class="nss-item green">NSS Completes & Uploads Proof</div>
+      </div>
+    </div>
+
+    <div class="ke-divider">
+      <div></div>
+      <span>fires after every karma event</span>
+      <div></div>
+    </div>
+    <div class="karma-engine">
+      <h4>Karma + badge engine</h4>
+      <p>Evaluates all 20 badge conditions · updates leaderboard · notifies citizen · refreshes profile</p>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM: QR + LEGEND + TEAM -->
+  <div class="bottom">
+
+    <div class="qr-card">
+      <h3>Scan to Get Started</h3>
+      <div class="qr-img">
+        <img src="QR.jpg" alt="QR Code"
+          onerror="this.parentElement.style.background='#FFF7ED';this.outerHTML='<span style=\'font-size:0.7rem;color:#F97316;\'>QR.jpg</span>'">
+      </div>
+      <p>Scan to access our platform</p>
+    </div>
+
+    <div class="right-col">
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#F97316;"></div>
+          Citizen actions
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#3B82F6;"></div>
+          Official / authority
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#22C55E;"></div>
+          Resolution
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#A855F7;"></div>
+          NSS Volunteers
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#F59E0B;"></div>
+          Karma engine
+        </div>
+      </div>
+
+      <div class="team">
+        <p>Team</p>
+        <div class="team-names">
+          <span class="team-name">Manas Patil</span>
+          <span class="team-name">Aditya Kadam</span>
+          <span class="team-name">Nishant Jadhav</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">NagrikGPT</div>
+    <div class="footer-text">Empower Your Voice. Transform Your City.</div>
+  </div>
+
+</div>
+</body>
+</html>
